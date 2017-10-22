@@ -161,9 +161,9 @@
             <properties>
                 <application.environment>production</application.environment>
                 <application.build.version>${env.JENKINS.PROD.VERSION.NUMBER}</application.build.version>
-                <application.build.appengine.id>narwhal-authorization</application.build.appengine.id>
+                <application.build.appengine.id>narwhal-status</application.build.appengine.id>
                 <application.build.appengine.version>1</application.build.appengine.version>
-                <application.url>http://narwhal-authorization.appspot.com/</application.url>
+                <application.url>http://narwhal-status.appspot.com/</application.url>
             </properties>
         </profile>
 
