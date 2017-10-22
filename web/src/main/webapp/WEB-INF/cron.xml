@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
-    <!--cron>
-        <url>/cron/count/daily</url>
-        <description>Update daily counters</description>
-        <schedule>every day 03:00</schedule>
+    <cron>
+        <url>/cron/health/check</url>
+        <description>Check health of micro-services</description>
+        <schedule>every 5 minutes</schedule>
         <timezone>America/Los_Angeles</timezone>
-    </cron-->
+    </cron>
 </cronentries>
