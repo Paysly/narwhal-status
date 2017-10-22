@@ -1,0 +1,24 @@
+# Mac Users
+.DS_Store
+
+# IntelliJ IDEA Project Files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/dbnavigator.xml
+
+# Java folders
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# AppEngine
+datanucleus.log
+
+# Apidoc.js folders
+src/main/webapp/docs/
+api-backend/src/main/webapp/docs/

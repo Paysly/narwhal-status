@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<queue-entries>
+    <!--queue>
+        <name>email-queue</name>
+        <bucket-size>20</bucket-size>
+        <max-concurrent-requests>1000</max-concurrent-requests>
+        <mode>push</mode>
+        <rate>20/s</rate>
+    </queue-->
+</queue-entries>

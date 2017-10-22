@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.narwhal.basics</groupId>
+        <artifactId>core-dependencies</artifactId>
+        <version>1.0.3</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <fork>false</fork>
+    </properties>
+    <groupId>com.narwhal.health</groupId>
+    <artifactId>web</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+
+    <name>web</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.narwhal.basics</groupId>
+            <artifactId>core-dependencies</artifactId>
+            <version>1.0.3</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.narwhal.basics</groupId>
+            <artifactId>core-rest</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.narwhal.basics</groupId>
+            <artifactId>core-jobs</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <!--dependency>
+            <groupId>com.narwhal.authorization</groupId>
+            <artifactId>core-rest</artifactId>
+            <version>1.0.0</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency-->
+        <dependency>
+            <groupId>com.narwhal.basics</groupId>
+            <artifactId>core-health</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.narwhal.health</groupId>
+            <artifactId>backend</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/${project.build.finalName}/WEB-INF/</targetPath>
+                <includes>
+                    <include>*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <targetPath>WEB-INF/</targetPath>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>src/main/resources/</directory>
+                            <targetPath>WEB-INF/classes/</targetPath>
+                            <includes>
+                                <include>*.properties</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>target/classes/</directory>
+                            <targetPath>WEB-INF/</targetPath>
+                            <includes>
+                                <include>appengine-web.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.datanucleus</groupId>
+                <artifactId>datanucleus-maven-plugin</artifactId>
+                <version>3.3.0-release</version>
+                <configuration>
+                    <verbose>true</verbose>
+                    <fork>false</fork>   <!-- Solve windows line too long error -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${gae.version}</version>
+                <configuration>
+                    <jvmFlags>
+                        <jvmFlag>-Ddatastore.backing_store=${project.basedir}/target/local_db.bin</jvmFlag>
+                        <jvmFlag>-Xdebug</jvmFlag>
+                        <jvmFlag>-XX:MaxPermSize=128m</jvmFlag>
+                        <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8004,server=y,suspend=n</jvmFlag>
+                    </jvmFlags>
+                    <enhancerApi>JPA</enhancerApi>
+                    <fullScanSeconds>2</fullScanSeconds>
+                    <enableJarClasses>true</enableJarClasses>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>jenkins-prod</id>
+            <properties>
+                <application.environment>production</application.environment>
+                <application.build.version>${env.JENKINS.PROD.VERSION.NUMBER}</application.build.version>
+                <application.build.appengine.id>narwhal-authorization</application.build.appengine.id>
+                <application.build.appengine.version>1</application.build.appengine.version>
+                <application.url>http://narwhal-authorization.appspot.com/</application.url>
+            </properties>
+        </profile>
+
+    </profiles>
+
+
+</project>

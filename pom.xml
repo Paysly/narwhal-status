@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.narwhal.health</groupId>
+    <artifactId>root-pom</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>narwhal-health-status</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- GAE properties -->
+        <gae.version>1.9.58</gae.version>
+        <gae.home>
+            ${user.home}/.m2/repository/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}
+        </gae.home>
+        <!-- Jersey Version -->
+        <jersey.version>1.17</jersey.version>
+        <!-- Don't let your Mac use a crazy non-standard encoding -->
+        <project.build.sourceEncoding>
+            UTF-8
+        </project.build.sourceEncoding>
+        <project.reporting.outputEncoding>
+            UTF-8
+        </project.reporting.outputEncoding>
+
+        <!-- Don't let your Mac use a crazy non-standard encoding -->
+        <application.url>
+            http://localhost:8080/
+        </application.url>
+        <application.email.contact>
+            tomasdepriede@gmail.com
+        </application.email.contact>
+
+    </properties>
+    <modules>
+        <module>backend</module>
+        <module>web</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>maven-public</id>
+            <url>http://nexus.soccyo.com/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,42 @@
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <application>${application.build.appengine.id}</application>
+    <version>${application.build.appengine.version}</version>
+    <runtime>java8</runtime>
+    <!-- WE WANT TO EXPLICITY SET THE THREAD SAFE OF OUR REQUEST -->
+    <threadsafe>true</threadsafe>
+    <!-- WE DO NOT WANT SESSIONS FOR COMPANY SITE-->
+    <sessions-enabled>false</sessions-enabled>
+    <!-- WE DO NOT WANT AND WE CANT BE ASYNC -->
+    <async-session-persistence enabled="false"/>
+    <!-- WE WANT A PRECOMPILATION IN THE EARLY STAGE -->
+    <precompilation-enabled>true</precompilation-enabled>
+    <!-- CURRENT INSTANCE CONFIGURATION -->
+    <instance-class>F1</instance-class>
+    <automatic-scaling>
+        <min-idle-instances>0</min-idle-instances>
+        <!-- ‘automatic’ is the default value. -->
+        <max-idle-instances>1</max-idle-instances>
+        <!-- ‘automatic’ is the default value. -->
+        <min-pending-latency>15s</min-pending-latency>
+        <max-pending-latency>15s</max-pending-latency>
+        <max-concurrent-requests>50</max-concurrent-requests>
+    </automatic-scaling>
+
+    <!-- Configure serving/caching of WEB files -->
+    <static-files>
+        <include path="/**.html" expiration="1s"/>
+        <include path="/**.png" expiration="7d"/>
+        <include path="/**.gif" expiration="7d"/>
+        <include path="/**.jpg" expiration="7d"/>
+        <include path="/**.css" expiration="7d"/>
+
+        <exclude path="/**.js"/>
+        <exclude path="/**.appcache"/>
+    </static-files>
+
+    <!-- Configure java.util.logging -->
+    <system-properties>
+        <property name="java.util.logging.config.file"
+                  value="WEB-INF/logging.properties"/>
+    </system-properties>
+</appengine-web-app>

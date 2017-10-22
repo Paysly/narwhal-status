@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+
+    <listener>
+        <listener-class>
+            com.narwhal.authorization.web.guice.WebGuiceServletContextListener
+        </listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <!-- ALL CRON AND TASKS JOBS SHOULD BE IN ADMIN -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin</web-resource-name>
+            <url-pattern>/tasks/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- ALL CRON AND TASKS JOBS SHOULD BE IN ADMIN -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>admin</web-resource-name>
+            <url-pattern>/cron/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/pages/error/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/pages/error/500.jsp</location>
+    </error-page>
+
+    <welcome-file-list>
+        <welcome-file>forward.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
+
