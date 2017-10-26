@@ -1,6 +1,5 @@
 package com.narwhal.authorization.web.guice;
 
-import com.google.inject.Provides;
 import com.narwhal.authorization.web.index.IndexServlet;
 import com.narwhal.authorization.web.utils.AppMicroservicesContext;
 import com.narwhal.authorization.web.utils.MicroservicesConstants;
@@ -8,8 +7,6 @@ import com.narwhal.basics.core.rest.guice.BaseWebServletModule;
 import com.narwhal.basics.core.rest.guice.SubModule;
 import com.narwhal.basics.core.rest.utils.MicroservicesContext;
 import com.narwhal.basics.core.rest.utils.SharedConstants;
-
-import javax.inject.Singleton;
 
 import static com.narwhal.authorization.web.utils.MicroservicesConstants.*;
 
@@ -22,8 +19,6 @@ public class WebServletModule extends BaseWebServletModule {
         super(servletModuleList);
     }
 
-    @Provides
-    @Singleton
     public MicroservicesContext provideMicroserviceContext() {
         MicroservicesContext microservicesContext = new AppMicroservicesContext();
         //
