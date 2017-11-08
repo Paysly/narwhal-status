@@ -4,6 +4,7 @@ import com.narwhal.basics.core.rest.guice.Cron;
 import com.narwhal.basics.core.rest.guice.RelativePath;
 import com.narwhal.basics.core.rest.utils.ToStringUtils;
 import com.narwhal.health.backend.dto.HealthCheckDTO;
+import com.narwhal.health.backend.services.HealthCheckSaveEachFiveMinutesService;
 import com.narwhal.health.backend.services.HealthCheckService;
 
 import javax.inject.Inject;
@@ -24,11 +25,15 @@ public class HealthCheckCronServlet extends HttpServlet {
     private Logger logger;
     @Inject
     private HealthCheckService healthCheckService;
+    @Inject
+    private HealthCheckSaveEachFiveMinutesService healthCheckSaveEachFiveMinutesService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.log(Level.INFO, "Pinging server status");
+        logger.log(Level.INFO, "Pinging server status every five minutes");
         HealthCheckDTO healthCheckDTO = healthCheckService.pingServers();
+        //
+        healthCheckSaveEachFiveMinutesService.saveHealthCheck(healthCheckDTO);
         //
         logger.log(Level.INFO, "Server status: " + ToStringUtils.toString(healthCheckDTO));
     }

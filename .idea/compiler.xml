@@ -12,6 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="backend" target="1.7" />
+      <module name="narwhal-health-status" target="1.8" />
       <module name="root-pom" target="1.8" />
       <module name="web" target="1.7" />
     </bytecodeTargetLevel>
