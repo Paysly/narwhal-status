@@ -19,7 +19,7 @@ public interface MicroservicesConstants {
                 String clientSecret = "F70B499A57AD7C38AF16009ADED4B5488BC4C0E983FFEAD49D94D78E67AFF4DC";
             }
         }
-        interface Application {
+        interface Users {
             // Same as beta for now
             interface Production {
                 String clientId = "paysly-users-production";

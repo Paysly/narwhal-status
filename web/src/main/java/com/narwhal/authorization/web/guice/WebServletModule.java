@@ -3,11 +3,9 @@ package com.narwhal.authorization.web.guice;
 import com.google.inject.Provides;
 import com.narwhal.authorization.web.index.IndexServlet;
 import com.narwhal.authorization.web.utils.AppMicroservicesContext;
-import com.narwhal.authorization.web.utils.MicroservicesConstants;
 import com.narwhal.basics.core.rest.guice.BaseWebServletModule;
 import com.narwhal.basics.core.rest.guice.SubModule;
 import com.narwhal.basics.core.rest.utils.MicroservicesContext;
-import com.narwhal.basics.core.rest.utils.SharedConstants;
 import com.narwhal.health.backend.utils.BackendMicroserviceContext;
 
 import javax.inject.Singleton;
@@ -37,17 +35,8 @@ public class WebServletModule extends BaseWebServletModule {
         microservicesContext.setLandingEndpoint(LANDING_ENDPOINT);
         //
         microservicesContext.setApplicationDevelopmentEndpoint(APPLICATION_DEVELOPMENT_ENDPOINT);
-        microservicesContext.setApplicationDevelopmentEndpoint(APPLICATION_BETA_ENDPOINT);
-        microservicesContext.setApplicationDevelopmentEndpoint(APPLICATION_PRODUCTION_ENDPOINT);
-        //
-        if (SharedConstants.isRunningOnAppEngine()) {
-            microservicesContext.getClientIdSecret().put(MicroservicesConstants.Credentials.Production.clientId,
-                    MicroservicesConstants.Credentials.Production.clientSecret);
-        } else {
-            microservicesContext.getClientIdSecret().put(MicroservicesConstants.Credentials.Development.clientId,
-                    MicroservicesConstants.Credentials.Development.clientSecret);
-        }
-        //
+        microservicesContext.setApplicationBetaEndpoint(APPLICATION_BETA_ENDPOINT);
+        microservicesContext.setApplicationProductionEndpoint(APPLICATION_PRODUCTION_ENDPOINT);
     }
 
     public MicroservicesContext provideMicroserviceContext() {
