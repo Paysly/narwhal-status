@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <datastore-indexes autoGenerate="true">
 
-    <!--datastore-index kind="NotificationItem" ancestor="false" source="manual">
-        <property name="version" direction="asc"/>
-        <property name="searchNames" direction="asc"/>
-    </datastore-index-->
+    <datastore-index kind="HealthCheck" ancestor="false" source="manual">
+        <property name="healthCheckType" direction="asc"/>
+        <property name="serverType" direction="asc"/>
+        <property name="date" direction="asc"/>
+    </datastore-index>
+
+    <datastore-index kind="HealthCheck" ancestor="false" source="manual">
+        <property name="healthCheckType" direction="asc"/>
+        <property name="serverType" direction="asc"/>
+        <property name="date" direction="asc"/>
+        <property name="hour" direction="asc"/>
+    </datastore-index>
 
 </datastore-indexes>
