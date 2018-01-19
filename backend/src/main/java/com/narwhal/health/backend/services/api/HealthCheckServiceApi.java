@@ -4,8 +4,8 @@ import com.google.appengine.api.urlfetch.HTTPHeader;
 import com.google.appengine.api.urlfetch.HTTPMethod;
 import com.google.inject.Inject;
 import com.narwhal.basics.core.rest.api.ApiFetchService;
-import com.narwhal.basics.core.rest.utils.MicroservicesContext;
 import com.narwhal.health.backend.types.HealthStatusType;
+import com.narwhal.health.backend.utils.BackendMicroserviceContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,11 +16,11 @@ public class HealthCheckServiceApi {
 
 
     public static final String HEALTH_ENDPOINT = "/health/";
-    private MicroservicesContext microservicesContext;
+    private BackendMicroserviceContext microservicesContext;
     private ApiFetchService apiFetchService;
 
     @Inject
-    public HealthCheckServiceApi(MicroservicesContext microservicesContext, ApiFetchService apiFetchService) {
+    public HealthCheckServiceApi(BackendMicroserviceContext microservicesContext, ApiFetchService apiFetchService) {
         this.microservicesContext = microservicesContext;
         this.apiFetchService = apiFetchService;
     }
@@ -32,32 +32,36 @@ public class HealthCheckServiceApi {
     }
 
     public HealthStatusType pingAdminServer() {
-        try {
-            String endpoint = microservicesContext.getAdminEndpoint() + HEALTH_ENDPOINT;
-            //
-            Map<String, String> params = new HashMap<>();
-            this.apiFetchService.fetch(endpoint, HTTPMethod.GET, this.prepareHeaders(), params, null);
-            return HealthStatusType.ONLINE;
-        } catch (Exception e) {
-            return HealthStatusType.UNKNOWN;
-        }
+        return pingServer(microservicesContext.getAdminEndpoint());
     }
 
     public HealthStatusType pingNotificationServer() {
-        try {
-            String endpoint = microservicesContext.getNotificationsEndpoint() + HEALTH_ENDPOINT;
-            //
-            Map<String, String> params = new HashMap<>();
-            this.apiFetchService.fetch(endpoint, HTTPMethod.GET, this.prepareHeaders(), params, null);
-            return HealthStatusType.ONLINE;
-        } catch (Exception e) {
-            return HealthStatusType.UNKNOWN;
-        }
+        return pingServer(microservicesContext.getNotificationsEndpoint());
     }
 
     public HealthStatusType pingAuthorizationServer() {
+        return pingServer(microservicesContext.getAuthorizationEndpoint());
+    }
+
+    public HealthStatusType pingLandingServer() {
+        return pingServer(microservicesContext.getLandingEndpoint());
+    }
+
+    public HealthStatusType pingApplicationDevelopmentServer() {
+        return pingServer(microservicesContext.getApplicationDevelopmentEndpoint());
+    }
+
+    public HealthStatusType pingApplicationBetaServer() {
+        return pingServer(microservicesContext.getApplicationBetaEndpoint());
+    }
+
+    public HealthStatusType pingApplicationProductionServer() {
+        return pingServer(microservicesContext.getApplicationProductionEndpoint());
+    }
+
+    private HealthStatusType pingServer(String endpoint) {
         try {
-            String endpoint = microservicesContext.getAuthorizationEndpoint() + HEALTH_ENDPOINT;
+            endpoint = endpoint + HEALTH_ENDPOINT;
             //
             Map<String, String> params = new HashMap<>();
             this.apiFetchService.fetch(endpoint, HTTPMethod.GET, this.prepareHeaders(), params, null);

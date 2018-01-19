@@ -100,21 +100,21 @@ public class HealthCheckServiceTest {
         object1.setHour(5);
         object1.setMinute(15);
         object1.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
-        object1.setServerType(ServerType.ADMIN);
+        object1.setServerType(ServerType.ADMIN_PRODUCTION);
         object1.setStatusType(HealthStatusType.UNKNOWN);
         //
         HealthCheck object2 = new HealthCheck();
         object2.setHour(5);
         object2.setMinute(30);
         object2.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
-        object2.setServerType(ServerType.ADMIN);
+        object2.setServerType(ServerType.ADMIN_PRODUCTION);
         object2.setStatusType(HealthStatusType.UNKNOWN);
         //
         HealthCheck object3 = new HealthCheck();
         object3.setHour(5);
         object3.setMinute(45);
         object3.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
-        object3.setServerType(ServerType.ADMIN);
+        object3.setServerType(ServerType.ADMIN_PRODUCTION);
         object3.setStatusType(HealthStatusType.UNKNOWN);
         //
         List<HealthCheck> expected = new ArrayList<>();
@@ -122,9 +122,9 @@ public class HealthCheckServiceTest {
         expected.add(object2);
         expected.add(object3);
         //
-        when(healthCheckDao.getByTypeFiveMinutes(ServerType.ADMIN, date.getTime(), 5)).thenReturn(expected);
+        when(healthCheckDao.getByTypeFiveMinutes(ServerType.ADMIN_PRODUCTION, date.getTime(), 5)).thenReturn(expected);
         //
-        List<HealthCheck> result = service.getHistorical(ServerType.ADMIN, date.getTime(), 5);
+        List<HealthCheck> result = service.getHistorical(ServerType.ADMIN_PRODUCTION, date.getTime(), 5);
         //
         assertEquals(result.get(0).getHealthCheckType(), expected.get(0).getHealthCheckType());
         assertEquals(result.get(1).getHealthCheckType(), expected.get(1).getHealthCheckType());
@@ -142,7 +142,7 @@ public class HealthCheckServiceTest {
         assertEquals(result.get(1).getHour(), expected.get(1).getHour());
         assertEquals(result.get(2).getHour(), expected.get(2).getHour());
         //
-        Mockito.verify(healthCheckDao).getByTypeFiveMinutes(ServerType.ADMIN, date.getTime(), 5);
+        Mockito.verify(healthCheckDao).getByTypeFiveMinutes(ServerType.ADMIN_PRODUCTION, date.getTime(), 5);
         //
         Mockito.verify(healthCheckDao, never()).getByTypeOneDay((ServerType) any());
         Mockito.verify(healthCheckDao, never()).getByTypeOneHour((ServerType) any(), anyLong());

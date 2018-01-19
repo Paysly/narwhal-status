@@ -48,7 +48,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck healthCheck = new HealthCheck();
         healthCheck.setStatusType(HealthStatusType.ONLINE);
         healthCheck.setHealthCheckType(HealthCheckType.ONE_HOUR);
-        healthCheck.init(ServerType.ADMIN, cal.getTime().getTime(), calHour.get(Calendar.HOUR_OF_DAY), calMin.get(Calendar.MINUTE));
+        healthCheck.init(ServerType.ADMIN_PRODUCTION, cal.getTime().getTime(), calHour.get(Calendar.HOUR_OF_DAY), calMin.get(Calendar.MINUTE));
         //
         return healthCheck;
     }
@@ -71,7 +71,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object1 = new HealthCheck();
         object1.setId("1");
         object1.setStatusType(HealthStatusType.UNKNOWN);
-        object1.setServerType(ServerType.ADMIN);
+        object1.setServerType(ServerType.ADMIN_PRODUCTION);
         object1.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
         object1.setHour(5);
         object1.setDate(cal.getTime().getTime());
@@ -87,7 +87,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object3 = new HealthCheck();
         object3.setId("3");
         object3.setStatusType(HealthStatusType.UNKNOWN);
-        object3.setServerType(ServerType.ADMIN);
+        object3.setServerType(ServerType.ADMIN_PRODUCTION);
         object3.setHealthCheckType(HealthCheckType.ONE_HOUR);
         object3.setHour(5);
         object3.setDate(cal.getTime().getTime());
@@ -95,7 +95,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object4 = new HealthCheck();
         object4.setId("4");
         object4.setStatusType(HealthStatusType.UNKNOWN);
-        object4.setServerType(ServerType.ADMIN);
+        object4.setServerType(ServerType.ADMIN_PRODUCTION);
         object4.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
         object4.setHour(7);
         object4.setDate(cal.getTime().getTime());
@@ -103,7 +103,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object5 = new HealthCheck();
         object5.setId("5");
         object5.setStatusType(HealthStatusType.UNKNOWN);
-        object5.setServerType(ServerType.ADMIN);
+        object5.setServerType(ServerType.ADMIN_PRODUCTION);
         object5.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
         object5.setHour(5);
         object5.setDate(cal.getTime().getTime());
@@ -111,7 +111,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object6 = new HealthCheck();
         object6.setId("6");
         object6.setStatusType(HealthStatusType.UNKNOWN);
-        object6.setServerType(ServerType.ADMIN);
+        object6.setServerType(ServerType.ADMIN_PRODUCTION);
         object6.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
         object6.setHour(5);
         object6.setDate(DateUtils.dateWithNoTime(getDayAMonthAgo()).getTime());
@@ -127,7 +127,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         expected.add(object1);
         expected.add(object5);
         //
-        List<HealthCheck> result = dao.getByTypeFiveMinutes(ServerType.ADMIN, cal.getTime().getTime(), 5);
+        List<HealthCheck> result = dao.getByTypeFiveMinutes(ServerType.ADMIN_PRODUCTION, cal.getTime().getTime(), 5);
         //
         assertEquals(expected, result);
         assertEquals(2, result.size());
@@ -151,7 +151,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object1 = new HealthCheck();
         object1.setId("1-OK");
         object1.setStatusType(HealthStatusType.UNKNOWN);
-        object1.setServerType(ServerType.ADMIN);
+        object1.setServerType(ServerType.ADMIN_PRODUCTION);
         object1.setHealthCheckType(HealthCheckType.ONE_HOUR);
         object1.setDate(cal.getTime().getTime());
         // different server type
@@ -165,28 +165,28 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object3 = new HealthCheck();
         object3.setId("3");
         object3.setStatusType(HealthStatusType.UNKNOWN);
-        object3.setServerType(ServerType.ADMIN);
+        object3.setServerType(ServerType.ADMIN_PRODUCTION);
         object3.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
         object3.setDate(cal.getTime().getTime());
         // different date and health check type
         HealthCheck object4 = new HealthCheck();
         object4.setId("4");
         object4.setStatusType(HealthStatusType.UNKNOWN);
-        object4.setServerType(ServerType.ADMIN);
+        object4.setServerType(ServerType.ADMIN_PRODUCTION);
         object4.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
         object4.setDate(DateUtils.dateWithNoTime(getDayAMonthAgo()).getTime());
         // OK
         HealthCheck object5 = new HealthCheck();
         object5.setId("5-OK");
         object5.setStatusType(HealthStatusType.UNKNOWN);
-        object5.setServerType(ServerType.ADMIN);
+        object5.setServerType(ServerType.ADMIN_PRODUCTION);
         object5.setHealthCheckType(HealthCheckType.ONE_HOUR);
         object5.setDate(cal.getTime().getTime());
         // different date
         HealthCheck object6 = new HealthCheck();
         object6.setId("6");
         object6.setStatusType(HealthStatusType.UNKNOWN);
-        object6.setServerType(ServerType.ADMIN);
+        object6.setServerType(ServerType.ADMIN_PRODUCTION);
         object6.setHealthCheckType(HealthCheckType.ONE_HOUR);
         object6.setDate(DateUtils.dateWithNoTime(getDayAMonthAgo()).getTime());
         //
@@ -201,7 +201,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         expected.add(object1);
         expected.add(object5);
         //
-        List<HealthCheck> result = dao.getByTypeOneHour(ServerType.ADMIN, cal.getTime().getTime());
+        List<HealthCheck> result = dao.getByTypeOneHour(ServerType.ADMIN_PRODUCTION, cal.getTime().getTime());
         //
         assertEquals(expected, result);
         assertEquals(2, result.size());
@@ -218,7 +218,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object1 = new HealthCheck();
         object1.setId("1-OK");
         object1.setStatusType(HealthStatusType.UNKNOWN);
-        object1.setServerType(ServerType.ADMIN);
+        object1.setServerType(ServerType.ADMIN_PRODUCTION);
         object1.setHealthCheckType(HealthCheckType.ONE_DAY);
         object1.setDate(new Date().getTime());
         // different server type
@@ -231,27 +231,27 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         HealthCheck object3 = new HealthCheck();
         object3.setId("3");
         object3.setStatusType(HealthStatusType.UNKNOWN);
-        object3.setServerType(ServerType.ADMIN);
+        object3.setServerType(ServerType.ADMIN_PRODUCTION);
         object3.setHealthCheckType(HealthCheckType.FIVE_MINUTES);
         // too old
         HealthCheck object4 = new HealthCheck();
         object4.setId("4");
         object4.setStatusType(HealthStatusType.UNKNOWN);
-        object4.setServerType(ServerType.ADMIN);
+        object4.setServerType(ServerType.ADMIN_PRODUCTION);
         object4.setHealthCheckType(HealthCheckType.ONE_DAY);
         object4.setDate(DateUtils.decreaseOneDay(decreaseOneDay(getDayAMonthAgo())).getTime());
         // OK
         HealthCheck object5 = new HealthCheck();
         object5.setId("5-OK");
         object5.setStatusType(HealthStatusType.UNKNOWN);
-        object5.setServerType(ServerType.ADMIN);
+        object5.setServerType(ServerType.ADMIN_PRODUCTION);
         object5.setHealthCheckType(HealthCheckType.ONE_DAY);
         object5.setDate(new Date().getTime());
         // OK
         HealthCheck object6 = new HealthCheck();
         object6.setId("6-OK");
         object6.setStatusType(HealthStatusType.UNKNOWN);
-        object6.setServerType(ServerType.ADMIN);
+        object6.setServerType(ServerType.ADMIN_PRODUCTION);
         object6.setHealthCheckType(HealthCheckType.ONE_DAY);
         object6.setDate(new Date().getTime());
         //
@@ -267,7 +267,7 @@ public class HealthCheckDaoObjectifyImplTest extends BaseDaoTest<HealthCheck, He
         expected.add(object5);
         expected.add(object6);
         //
-        List<HealthCheck> result = dao.getByTypeOneDay(ServerType.ADMIN);
+        List<HealthCheck> result = dao.getByTypeOneDay(ServerType.ADMIN_PRODUCTION);
         //
         assertEquals(expected, result);
         assertEquals(3, result.size());

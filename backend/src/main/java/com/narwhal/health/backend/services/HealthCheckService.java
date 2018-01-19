@@ -24,6 +24,13 @@ public class HealthCheckService {
         HealthCheckDTO healthCheckDTO = new HealthCheckDTO();
         //
         healthCheckDTO.setAdminServer(serviceApi.pingAdminServer());
+        //
+        healthCheckDTO.setLandingServer(serviceApi.pingLandingServer());
+        //
+        healthCheckDTO.setApplicationDevelopmentServer(serviceApi.pingApplicationDevelopmentServer());
+        healthCheckDTO.setApplicationBetaServer(serviceApi.pingApplicationBetaServer());
+        healthCheckDTO.setApplicationProductionServer(serviceApi.pingApplicationProductionServer());
+        //
         healthCheckDTO.setAuthorizationServer(serviceApi.pingAuthorizationServer());
         healthCheckDTO.setNotificationServer(serviceApi.pingNotificationServer());
         //

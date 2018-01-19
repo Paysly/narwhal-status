@@ -1,8 +1,10 @@
 package com.narwhal.authorization.web.utils;
 
-import com.narwhal.basics.core.rest.utils.MicroservicesContext;
+import com.narwhal.health.backend.utils.BackendMicroserviceContext;
+import lombok.Data;
 
-public class AppMicroservicesContext extends MicroservicesContext {
+@Data
+public class AppMicroservicesContext extends BackendMicroserviceContext {
 
     @Override
     public String getStagingBaseServerUrl() {

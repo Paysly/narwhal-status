@@ -7,6 +7,7 @@ import com.narwhal.health.backend.dto.HealthCheckDTO;
 import com.narwhal.health.backend.model.HealthCheck;
 import com.narwhal.health.backend.services.HealthCheckService;
 import com.narwhal.health.backend.types.ServerType;
+import lombok.extern.java.Log;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,10 +15,12 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Log
 @Singleton
 @Path("/v1/health/check/")
 public class HealthCheckApi {
-    private Logger logger = Logger.getLogger(HealthCheckApi.class.getSimpleName());
+
+
 
     @Inject
     private HealthCheckService healthCheckService;

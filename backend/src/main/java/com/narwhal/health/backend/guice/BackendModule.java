@@ -3,7 +3,7 @@ package com.narwhal.health.backend.guice;
 import com.narwhal.basics.core.rest.guice.SubModule;
 import com.narwhal.basics.core.rest.model.BaseModel;
 import com.narwhal.health.backend.api.HealthCheckApi;
-import com.narwhal.health.backend.cron.HealthCheckCronServlet;
+import com.narwhal.health.backend.cron.HealthCheckFiveMinutesCronServlet;
 import com.narwhal.health.backend.model.HealthCheck;
 
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ public class BackendModule extends SubModule {
     public List<Class<? extends HttpServlet>> cronClasses() {
         List<Class<? extends HttpServlet>> list = new ArrayList<>();
         //
-        list.add(HealthCheckCronServlet.class);
+        list.add(HealthCheckFiveMinutesCronServlet.class);
         //
         return list;
     }
@@ -28,6 +28,7 @@ public class BackendModule extends SubModule {
         //
         return list;
     }
+
 
     @Override
     public List<Class<? extends BaseModel>> objectifyClasses() {

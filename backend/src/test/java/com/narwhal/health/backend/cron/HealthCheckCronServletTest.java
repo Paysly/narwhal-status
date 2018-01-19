@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class HealthCheckCronServletTest {
 
     @InjectMocks
-    private HealthCheckCronServlet healthCheckFiveMinutesCronServlet;
+    private HealthCheckFiveMinutesCronServlet healthCheckFiveMinutesCronServlet;
 
     @Mock
     private Logger logger;
@@ -33,7 +33,7 @@ public class HealthCheckCronServletTest {
 
     @Before
     public void setUp() {
-        healthCheckFiveMinutesCronServlet = new HealthCheckCronServlet();
+        healthCheckFiveMinutesCronServlet = new HealthCheckFiveMinutesCronServlet();
         MockitoAnnotations.initMocks(this);
     }
 

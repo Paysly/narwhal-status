@@ -33,7 +33,7 @@
     </security-constraint>
 
 
-    <!-- ALL CRON AND TASKS JOBS SHOULD BE IN ADMIN -->
+    <!-- ALL CRON AND TASKS JOBS SHOULD BE IN ADMIN_PRODUCTION -->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
@@ -44,7 +44,7 @@
         </auth-constraint>
     </security-constraint>
 
-    <!-- ALL CRON AND TASKS JOBS SHOULD BE IN ADMIN -->
+    <!-- ALL CRON AND TASKS JOBS SHOULD BE IN ADMIN_PRODUCTION -->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
