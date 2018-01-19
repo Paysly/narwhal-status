@@ -74,7 +74,7 @@ public class HealthCheckSaveEachFiveMinutesServiceTest {
         //
         healthCheckSaveEachFiveMinutesService.saveHealthCheck(healthCheckDTOExpected);
         //
-        Mockito.verify(healthCheckDao, times(3)).save((HealthCheck) any());
+        Mockito.verify(healthCheckDao, times(7)).save((HealthCheck) any());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class HealthCheckSaveEachFiveMinutesServiceTest {
         //
         healthCheckSaveEachFiveMinutesService.saveHealthCheck(healthCheckDTOExpected);
         //
-        Mockito.verify(healthCheckDao, times(3)).save((HealthCheck) any());
+        Mockito.verify(healthCheckDao, times(7)).save((HealthCheck) any());
     }
 
     @Test
@@ -146,6 +146,6 @@ public class HealthCheckSaveEachFiveMinutesServiceTest {
         //
         healthCheckSaveEachFiveMinutesService.saveHealthCheck(healthCheckDTOExpected);
         //
-        Mockito.verify(healthCheckDao, times(3)).save((HealthCheck) any());
+        Mockito.verify(healthCheckDao, times(7)).save((HealthCheck) any());
     }
 }

@@ -2,6 +2,7 @@ package com.narwhal.health.backend.cron;
 
 import com.narwhal.basics.core.rest.utils.ToStringUtils;
 import com.narwhal.health.backend.dto.HealthCheckDTO;
+import com.narwhal.health.backend.services.AdminNotificationService;
 import com.narwhal.health.backend.services.HealthCheckSaveEachFiveMinutesService;
 import com.narwhal.health.backend.services.HealthCheckService;
 import com.narwhal.health.backend.types.HealthStatusType;
@@ -30,6 +31,8 @@ public class HealthCheckCronServletTest {
     private HealthCheckService healthCheckService;
     @Mock
     private HealthCheckSaveEachFiveMinutesService healthCheckSaveEachFiveMinutesService;
+    @Mock
+    private AdminNotificationService adminNotificationService;
 
     @Before
     public void setUp() {
@@ -50,7 +53,5 @@ public class HealthCheckCronServletTest {
         healthCheckFiveMinutesCronServlet.doGet(null, null);
         //
         Mockito.verify(healthCheckSaveEachFiveMinutesService).saveHealthCheck(healthCheckDTOExpected);
-        Mockito.verify(logger).log(Level.INFO, "Server status: " + ToStringUtils.toString(healthCheckDTOExpected));
-        Mockito.verify(logger).log(Level.INFO, "Pinging server status every five minutes");
     }
 }
