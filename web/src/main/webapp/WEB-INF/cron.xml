@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
     <cron>
-        <url>/cron/health/check</url>
-        <description>Check health of micro-services</description>
+        <url>/cron/health/checkfiveminutes</url>
+        <description>Check health of micro-services every 5 minutes</description>
         <schedule>every 5 minutes</schedule>
         <timezone>America/Los_Angeles</timezone>
     </cron>
