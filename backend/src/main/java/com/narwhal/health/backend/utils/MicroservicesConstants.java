@@ -2,8 +2,6 @@ package com.narwhal.health.backend.utils;
 
 public interface MicroservicesConstants {
 
-    String AUTHORIZATION_ENDPOINT = "https://positano-authorization.appspot.com/api/v1/authorization/";
-    String NOTIFICATIONS_ENDPOINT = "https://positano-notifications.appspot.com/api/v1";
     String NOTIFICATIONS_VERSION = "1.0.0";
     String NOTIFICATIONS_TEMPLATE = "en_us";
     String NOTIFICATIONS_KEY_SERVER_STATUS = "server.status";
