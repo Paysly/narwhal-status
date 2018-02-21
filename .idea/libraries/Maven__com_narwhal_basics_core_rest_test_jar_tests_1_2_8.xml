@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.narwhal.basics:core-rest:test-jar:tests:1.2.8">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/narwhal/basics/core-rest/1.2.8/core-rest-1.2.8-tests.jar!/" />
+      <root url="jar://$USER_HOME$/m2/repository/com/narwhal/basics/core-rest/1.2.8/core-rest-1.2.8-tests.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/narwhal/basics/core-rest/1.2.8/core-rest-1.2.8-test-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/m2/repository/com/narwhal/basics/core-rest/1.2.8/core-rest-1.2.8-test-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/narwhal/basics/core-rest/1.2.8/core-rest-1.2.8-test-sources.jar!/" />
+      <root url="jar://$USER_HOME$/m2/repository/com/narwhal/basics/core-rest/1.2.8/core-rest-1.2.8-test-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

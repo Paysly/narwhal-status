@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import com.narwhal.basics.core.rest.api.ApiFetchService;
 import com.narwhal.health.backend.types.HealthStatusType;
 import com.narwhal.health.backend.utils.BackendMicroserviceContext;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class HealthCheckServiceApi {
     }
 
     public HealthStatusType pingAuthorizationServer() {
-        return pingServer(microservicesContext.getAuthorizationEndpoint());
+        return pingServer(StringUtils.replace(microservicesContext.getAuthorizationEndpoint(),"/authorization/",""));
     }
 
     public HealthStatusType pingLandingServer() {

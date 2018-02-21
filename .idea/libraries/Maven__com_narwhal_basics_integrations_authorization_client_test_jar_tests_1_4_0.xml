@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.narwhal.basics:integrations-authorization-client:test-jar:tests:1.4.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/m2/repository/com/narwhal/basics/integrations-authorization-client/1.4.0/integrations-authorization-client-1.4.0-tests.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/m2/repository/com/narwhal/basics/integrations-authorization-client/1.4.0/integrations-authorization-client-1.4.0-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/m2/repository/com/narwhal/basics/integrations-authorization-client/1.4.0/integrations-authorization-client-1.4.0-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

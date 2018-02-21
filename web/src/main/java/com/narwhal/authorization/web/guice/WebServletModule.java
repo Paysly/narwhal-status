@@ -6,7 +6,9 @@ import com.narwhal.authorization.web.utils.AppMicroservicesContext;
 import com.narwhal.basics.core.rest.guice.BaseWebServletModule;
 import com.narwhal.basics.core.rest.guice.SubModule;
 import com.narwhal.basics.core.rest.utils.MicroservicesContext;
+import com.narwhal.basics.core.rest.utils.SharedConstants;
 import com.narwhal.health.backend.utils.BackendMicroserviceContext;
+import com.narwhal.health.backend.utils.MicroservicesConstants;
 
 import javax.inject.Singleton;
 
@@ -37,6 +39,16 @@ public class WebServletModule extends BaseWebServletModule {
         microservicesContext.setApplicationDevelopmentEndpoint(APPLICATION_DEVELOPMENT_ENDPOINT);
         microservicesContext.setApplicationBetaEndpoint(APPLICATION_BETA_ENDPOINT);
         microservicesContext.setApplicationProductionEndpoint(APPLICATION_PRODUCTION_ENDPOINT);
+        //
+        if (SharedConstants.isRunningOnAppEngine()) {
+            // Admin
+            microservicesContext.getClientIdSecret().put(MicroservicesConstants.Paysly.Admin.Production.clientId,
+                    MicroservicesConstants.Paysly.Admin.Production.clientSecret);
+        } else {
+            // Admin
+            microservicesContext.getClientIdSecret().put(MicroservicesConstants.Paysly.Admin.Development.clientId,
+                    MicroservicesConstants.Paysly.Admin.Development.clientSecret);
+        }
     }
 
     public MicroservicesContext provideMicroserviceContext() {
