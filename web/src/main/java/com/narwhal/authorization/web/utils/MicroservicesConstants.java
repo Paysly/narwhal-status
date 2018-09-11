@@ -9,7 +9,7 @@ public interface MicroservicesConstants {
     //
     String APPLICATION_DEVELOPMENT_ENDPOINT = "https://dev.pays.ly/api/v1";
     String APPLICATION_BETA_ENDPOINT = "https://beta.pays.ly/api/v1";
-    String APPLICATION_PRODUCTION_ENDPOINT = "https://pays.ly/api/v1";
+    String APPLICATION_PRODUCTION_ENDPOINT = "https://beta.pays.ly/api/v1";
     //
-    String LANDING_ENDPOINT = "https://pays.ly/api/v1";
+    String LANDING_ENDPOINT = "https://www.pays.ly/";
 }

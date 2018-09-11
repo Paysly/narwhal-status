@@ -45,7 +45,7 @@ public class HealthCheckServiceApi {
     }
 
     public HealthStatusType pingLandingServer() {
-        return pingServer(microservicesContext.getLandingEndpoint());
+        return pingPage(microservicesContext.getLandingEndpoint());
     }
 
     public HealthStatusType pingApplicationDevelopmentServer() {
@@ -64,6 +64,16 @@ public class HealthCheckServiceApi {
         try {
             endpoint = endpoint + HEALTH_ENDPOINT;
             //
+            Map<String, String> params = new HashMap<>();
+            this.apiFetchService.fetch(endpoint, HTTPMethod.GET, this.prepareHeaders(), params, null);
+            return HealthStatusType.ONLINE;
+        } catch (Exception e) {
+            return HealthStatusType.UNKNOWN;
+        }
+    }
+
+    private HealthStatusType pingPage(String endpoint) {
+        try {
             Map<String, String> params = new HashMap<>();
             this.apiFetchService.fetch(endpoint, HTTPMethod.GET, this.prepareHeaders(), params, null);
             return HealthStatusType.ONLINE;
