@@ -23,15 +23,15 @@ public class AdminNotificationService {
 
     public void sendEmail(HealthCheckDTO healthCheckDTO) {
         //
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("healthCheckDTO", healthCheckDTO);
+        HashMap<String, Object> model = new HashMap<>();
+        model.put("healthCheckDTO", healthCheckDTO);
         //
         NotificationForceMessageDTO forceMessageDTO = new NotificationForceMessageDTO();
         //
         forceMessageDTO.setVersion(MicroservicesConstants.NOTIFICATIONS_VERSION);
         forceMessageDTO.setNotificationKey(MicroservicesConstants.NOTIFICATIONS_KEY_SERVER_STATUS);
         forceMessageDTO.setTemplateName(MicroservicesConstants.NOTIFICATIONS_TEMPLATE);
-        forceMessageDTO.setModel(map);
+        forceMessageDTO.setModel(model);
         //
         if (healthCheckDTO.getAdminServer() == HealthStatusType.UNKNOWN ||
                 healthCheckDTO.getAuthorizationServer() == HealthStatusType.UNKNOWN ||
