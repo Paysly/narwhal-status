@@ -5,6 +5,7 @@ import com.narwhal.basics.integrations.notifications.client.dto.messages.Notific
 import com.narwhal.basics.integrations.notifications.client.dto.users.NotificationUserDTO;
 import com.narwhal.basics.integrations.notifications.client.endpoints.NotificationMessageEndpoint;
 import com.narwhal.basics.integrations.notifications.client.endpoints.NotificationUserEndpoint;
+import com.narwhal.basics.integrations.notifications.client.types.NotificationMechanismType;
 import com.narwhal.health.backend.dto.HealthCheckDTO;
 import com.narwhal.health.backend.types.HealthStatusType;
 import com.narwhal.health.backend.utils.AppClientConstants;
@@ -28,6 +29,7 @@ public class AdminNotificationService {
         //
         NotificationForceMessageDTO forceMessageDTO = new NotificationForceMessageDTO();
         //
+        forceMessageDTO.setForcedMechanismType(NotificationMechanismType.EMAIL);
         forceMessageDTO.setVersion(MicroservicesConstants.NOTIFICATIONS_VERSION);
         forceMessageDTO.setNotificationKey(MicroservicesConstants.NOTIFICATIONS_KEY_SERVER_STATUS);
         forceMessageDTO.setTemplateName(MicroservicesConstants.NOTIFICATIONS_TEMPLATE);
