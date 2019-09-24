@@ -67,25 +67,21 @@ public class HealthCheckServiceApi {
     private HealthStatusType pingServer(String endpoint) {
         try {
             endpoint = endpoint + HEALTH_ENDPOINT;
-            log.log(Level.INFO, "Ping Server: " + endpoint);
             //
             Map<String, String> params = new HashMap<>();
             this.apiFetchService.fetch(endpoint, HTTPMethod.GET, this.prepareHeaders(), params, null);
             return HealthStatusType.ONLINE;
         } catch (Exception e) {
-            log.log(Level.INFO, ToStringUtils.toString(e));
             return HealthStatusType.UNKNOWN;
         }
     }
 
     private HealthStatusType pingPage(String endpoint) {
         try {
-            log.log(Level.INFO, "Ping Page: " + endpoint);
             Map<String, String> params = new HashMap<>();
             this.apiFetchService.fetch(endpoint, HTTPMethod.GET, this.prepareHeaders(), params, null);
             return HealthStatusType.ONLINE;
         } catch (Exception e) {
-            log.log(Level.INFO, ToStringUtils.toString(e));
             return HealthStatusType.UNKNOWN;
         }
     }
