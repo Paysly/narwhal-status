@@ -1,5 +1,6 @@
 package com.narwhal.health.backend.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.narwhal.basics.integrations.notifications.client.dto.messages.NotificationForceMessageDTO;
 import com.narwhal.basics.integrations.notifications.client.dto.users.NotificationUserDTO;
@@ -50,11 +51,12 @@ public class AdminNotificationService {
                 healthCheckDTO.getLandingServer() == HealthStatusType.UNKNOWN) {
             //
             ArrayList<String> adminEmails = new ArrayList<>(Arrays.asList(ADMIN_EMAILS));
-            List<NotificationUserDTO> list = notificationUserEndpoint.getUserByEmails(AppClientConstants.getAdminClientId(), adminEmails);
+            List list = notificationUserEndpoint.getUserByEmails(AppClientConstants.getAdminClientId(), adminEmails);
             //
-            for (NotificationUserDTO l : list) {
+            for (Object entry : list) {
+                NotificationUserDTO notificationUserDTO = new ObjectMapper().convertValue(entry, NotificationUserDTO.class);
                 try {
-                    forceMessageDTO.setUserTo(l.getId());
+                    forceMessageDTO.setUserTo(notificationUserDTO.getId());
                     notificationMessageEndpoint.sendForceMessageNotification(AppClientConstants.getAdminClientId(), forceMessageDTO);
                 } catch (Exception ignore) {
                 }
