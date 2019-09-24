@@ -4,15 +4,19 @@ import com.google.inject.Inject;
 import com.narwhal.basics.integrations.notifications.client.dto.messages.NotificationForceMessageDTO;
 import com.narwhal.basics.integrations.notifications.client.dto.users.NotificationUserDTO;
 import com.narwhal.basics.integrations.notifications.client.endpoints.NotificationMessageEndpoint;
-import com.narwhal.basics.integrations.notifications.client.endpoints.NotificationUserEndpoint;
 import com.narwhal.basics.integrations.notifications.client.types.NotificationMechanismType;
 import com.narwhal.health.backend.dto.HealthCheckDTO;
+import com.narwhal.health.backend.endpoint.NotificationUserEndpoint;
 import com.narwhal.health.backend.types.HealthStatusType;
 import com.narwhal.health.backend.utils.AppClientConstants;
 import com.narwhal.health.backend.utils.MicroservicesConstants;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.narwhal.health.backend.utils.MicroservicesConstants.ADMIN_EMAILS;
 
 public class AdminNotificationService {
 
@@ -45,11 +49,15 @@ public class AdminNotificationService {
                 //
                 healthCheckDTO.getLandingServer() == HealthStatusType.UNKNOWN) {
             //
-            List<NotificationUserDTO> list = notificationUserEndpoint.getUsers(AppClientConstants.getAdminClientId(), 100, null, null).getResultList();
+            ArrayList<String> adminEmails = new ArrayList<>(Arrays.asList(ADMIN_EMAILS));
+            List<NotificationUserDTO> list = notificationUserEndpoint.getUserByEmails(AppClientConstants.getAdminClientId(), adminEmails);
             //
             for (NotificationUserDTO l : list) {
-                forceMessageDTO.setUserTo(l.getId());
-                notificationMessageEndpoint.sendForceMessageNotification(AppClientConstants.getAdminClientId(), forceMessageDTO);
+                try {
+                    forceMessageDTO.setUserTo(l.getId());
+                    notificationMessageEndpoint.sendForceMessageNotification(AppClientConstants.getAdminClientId(), forceMessageDTO);
+                } catch (Exception ignore) {
+                }
             }
         }
     }
