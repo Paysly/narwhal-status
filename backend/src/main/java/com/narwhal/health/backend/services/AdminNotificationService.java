@@ -1,17 +1,24 @@
 package com.narwhal.health.backend.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
 import com.narwhal.basics.integrations.notifications.client.dto.messages.NotificationForceMessageDTO;
 import com.narwhal.basics.integrations.notifications.client.dto.users.NotificationUserDTO;
 import com.narwhal.basics.integrations.notifications.client.endpoints.NotificationMessageEndpoint;
-import com.narwhal.basics.integrations.notifications.client.endpoints.NotificationUserEndpoint;
+import com.narwhal.basics.integrations.notifications.client.types.NotificationMechanismType;
 import com.narwhal.health.backend.dto.HealthCheckDTO;
+import com.narwhal.health.backend.endpoint.NotificationUserEndpoint;
 import com.narwhal.health.backend.types.HealthStatusType;
 import com.narwhal.health.backend.utils.AppClientConstants;
 import com.narwhal.health.backend.utils.MicroservicesConstants;
+import org.apache.commons.collections.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.narwhal.health.backend.utils.MicroservicesConstants.ADMIN_EMAILS;
 
 public class AdminNotificationService {
 
@@ -28,6 +35,7 @@ public class AdminNotificationService {
         //
         NotificationForceMessageDTO forceMessageDTO = new NotificationForceMessageDTO();
         //
+        forceMessageDTO.setForcedMechanismType(NotificationMechanismType.EMAIL);
         forceMessageDTO.setVersion(MicroservicesConstants.NOTIFICATIONS_VERSION);
         forceMessageDTO.setNotificationKey(MicroservicesConstants.NOTIFICATIONS_KEY_SERVER_STATUS);
         forceMessageDTO.setTemplateName(MicroservicesConstants.NOTIFICATIONS_TEMPLATE);
@@ -43,11 +51,18 @@ public class AdminNotificationService {
                 //
                 healthCheckDTO.getLandingServer() == HealthStatusType.UNKNOWN) {
             //
-            List<NotificationUserDTO> list = notificationUserEndpoint.getUsers(AppClientConstants.getAdminClientId(), 100, null, null).getResultList();
+            ArrayList<String> adminEmails = new ArrayList<>(Arrays.asList(ADMIN_EMAILS));
+            List list = notificationUserEndpoint.getUserByEmails(AppClientConstants.getAdminClientId(), adminEmails);
             //
-            for (NotificationUserDTO l : list) {
-                forceMessageDTO.setUserTo(l.getId());
-                notificationMessageEndpoint.sendForceMessageNotification(AppClientConstants.getAdminClientId(), forceMessageDTO);
+            if (CollectionUtils.isNotEmpty(list)) {
+                for (Object entry : list) {
+                    NotificationUserDTO notificationUserDTO = new ObjectMapper().convertValue(entry, NotificationUserDTO.class);
+                    try {
+                        forceMessageDTO.setUserTo(notificationUserDTO.getId());
+                        notificationMessageEndpoint.sendForceMessageNotification(AppClientConstants.getAdminClientId(), forceMessageDTO);
+                    } catch (Exception ignore) {
+                    }
+                }
             }
         }
     }

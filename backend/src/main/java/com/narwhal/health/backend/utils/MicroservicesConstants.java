@@ -5,6 +5,7 @@ public interface MicroservicesConstants {
     String NOTIFICATIONS_VERSION = "dev-v2";
     String NOTIFICATIONS_TEMPLATE = "en_us";
     String NOTIFICATIONS_KEY_SERVER_STATUS = "server.status";
+    String[] ADMIN_EMAILS = {"tomas@otomoapp.com", "khellar@otomoapp.com", "jem@otomoapp.com", "federico@otomoapp.com", "gonzalo@otomoapp.com"};
 
 
     interface Paysly {
