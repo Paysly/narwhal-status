@@ -11,6 +11,7 @@ import com.narwhal.health.backend.endpoint.NotificationUserEndpoint;
 import com.narwhal.health.backend.types.HealthStatusType;
 import com.narwhal.health.backend.utils.AppClientConstants;
 import com.narwhal.health.backend.utils.MicroservicesConstants;
+import org.apache.commons.collections.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,12 +54,14 @@ public class AdminNotificationService {
             ArrayList<String> adminEmails = new ArrayList<>(Arrays.asList(ADMIN_EMAILS));
             List list = notificationUserEndpoint.getUserByEmails(AppClientConstants.getAdminClientId(), adminEmails);
             //
-            for (Object entry : list) {
-                NotificationUserDTO notificationUserDTO = new ObjectMapper().convertValue(entry, NotificationUserDTO.class);
-                try {
-                    forceMessageDTO.setUserTo(notificationUserDTO.getId());
-                    notificationMessageEndpoint.sendForceMessageNotification(AppClientConstants.getAdminClientId(), forceMessageDTO);
-                } catch (Exception ignore) {
+            if (CollectionUtils.isNotEmpty(list)) {
+                for (Object entry : list) {
+                    NotificationUserDTO notificationUserDTO = new ObjectMapper().convertValue(entry, NotificationUserDTO.class);
+                    try {
+                        forceMessageDTO.setUserTo(notificationUserDTO.getId());
+                        notificationMessageEndpoint.sendForceMessageNotification(AppClientConstants.getAdminClientId(), forceMessageDTO);
+                    } catch (Exception ignore) {
+                    }
                 }
             }
         }
